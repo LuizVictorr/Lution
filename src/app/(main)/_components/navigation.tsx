@@ -1,15 +1,21 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon } from "lucide-react";
+import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./user-item";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
+import { Item } from "./item";
+import { toast } from "sonner";
+import { DocumentList } from "./document-list";
 
 export const Navigation = () => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
+    const create = useMutation(api.document.create)
 
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -85,6 +91,15 @@ export const Navigation = () => {
         }
     }
 
+    const handleCreate = () => {
+        const promise = create({title: "Não sei"})
+
+        toast.promise(promise, {
+            loading: "Criando uma nova nota",
+            success: "Nova nota criada",
+            error: "Erro ao criar a nota"
+        });
+    };
 
     return (
         <>
@@ -108,9 +123,25 @@ export const Navigation = () => {
                 </div>
                 <div>
                     <UserItem/>
+                    <Item
+                        label="Search"
+                        icon={Search}
+                        isSearch
+                        onClick={() => {}}
+                    />
+                    <Item
+                        label="Settings"
+                        icon={Settings}
+                        onClick={() => {}}
+                    />
+                    <Item 
+                        onClick={handleCreate} 
+                        label="New Page" 
+                        icon={PlusCircle}
+                    />
                 </div>
                 <div className="mt-4">
-                    <p>Documents</p>
+                    <DocumentList/>
                 </div>
                 <div
                     onMouseDown={handleMouseDown}
