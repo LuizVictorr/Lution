@@ -91,7 +91,6 @@ export const Item = ({
             className={cn(
                 "group min-h-[27px] text-sm py-1 pr-3 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium",
                 active && "bg-primary/5 text-primary"
-            
             )}
         >
             {!!id && (
@@ -106,7 +105,7 @@ export const Item = ({
                 </div>
             )}
             {documentIcon ? (
-                <div className="shrink-0 mr-2 text-[18px">
+                <div className="shrink-0 mr-2 text-[18px]">
                     {documentIcon}
                 </div>
             ) : (
@@ -116,7 +115,7 @@ export const Item = ({
                 {label}
             </span>
             {isSearch && (
-                <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                     <span className="text-xs">crtl</span>k
                 </kbd>
             )}
